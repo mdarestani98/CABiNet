@@ -287,7 +287,7 @@ class CABiNet(nn.Module):
     def __init__(self, n_classes, backbone_weights=None, *args, **kwargs):
         super(CABiNet, self).__init__()
         self.mobile = MobileNetV3(
-            pretrained=True, width_mult=1.0, weights=backbone_weights
+            pretrained=backbone_weights is not None, width_mult=1.0, weights=backbone_weights
         )
         self.ab = AttentionBranch(576, 256, 256, n_classes)
         self.sb = SpatialBranch()
